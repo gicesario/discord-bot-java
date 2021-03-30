@@ -1,4 +1,4 @@
-package br.com.dextra.scoremodels.confg;
+package br.com.dextra.scoremodels;
 
 import java.util.List;
 
@@ -13,36 +13,37 @@ import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.Event;
 
+
 @Configuration
 public class BotConfig {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-        
+    private static final Logger log = LoggerFactory.getLogger( BotConfig.class );
+
     @Value("${token}")
     private String token;
 
     @Bean
-    public GatewayDiscordClient gatewayDiscordClient() {
-        return DiscordClientBuilder.create(token)
-          .build()
-          .login()
-          .block();
-    }
-    
-    @Bean
     public <T extends Event> GatewayDiscordClient gatewayDiscordClient(List<EventListener<T>> eventListeners) {
-        GatewayDiscordClient client = DiscordClientBuilder.create(token)
-          .build()
-          .login()
-          .block();
+        GatewayDiscordClient client = null;
 
-        for(EventListener<T> listener : eventListeners) {
-            client.on(listener.getEventType())
-              .flatMap(listener::execute)
-              .onErrorResume(listener::handleError)
-              .subscribe();
+        try {
+            client = DiscordClientBuilder.create(token)
+              .build()
+              .login()
+              .block();
+
+            for(EventListener<T> listener : eventListeners) {
+                client.on(listener.getEventType())
+                  .flatMap(listener::execute)
+                  .onErrorResume(listener::handleError)
+                  .subscribe();
+            }
+        }
+        catch ( Exception exception ) {
+            log.error( "Be sure to use a valid bot token!", exception );
         }
 
         return client;
     }
 }
+

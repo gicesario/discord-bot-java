@@ -1,9 +1,10 @@
 package br.com.dextra.scoremodels.event;
 
-import discord4j.core.event.domain.message.MessageCreateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import discord4j.core.event.domain.message.MessageCreateEvent;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -19,8 +20,7 @@ public class MessageCreateListener extends MessageListener implements EventListe
     @Override
     public Mono<Void> execute(MessageCreateEvent event) {
         logger.info("Inside execute");
-        Mono<Void> voidMono = processCommand(event.getMessage());
-        return voidMono;
+        return processCommand(event.getMessage());
     }
-
 }
+

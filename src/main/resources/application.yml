@@ -1,15 +1,16 @@
-token: 'our-token-here'
 
-server:
-  address: 127.0.0.1
-  port: 9090
-  
-spring:
-  data.mongodb:
-    authentication-database: admin
-    password: root
-    username: root
-    host: 127.0.0.1
-    port: 27017
-    uri: #uri
-    database: scoremodels
+token: 'ODI2NDYwNTcyMzM3NzAwOTA0.YGMzYw.4aUrZ2BHXa4Q3ftJlkEGBA-r_U8'
+
+#server:
+#  address: 127.0.0.1
+#  port: 9090
+#  
+#spring:
+#  data.mongodb:
+#    authentication-database: admin
+#    password: root
+#    username: root
+#    host: 127.0.0.1
+#    port: 27017
+#    uri: #uri
+#    database: scoremodels

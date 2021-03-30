@@ -1,28 +1,16 @@
 package br.com.dextra.scoremodels.event;
 
-import discord4j.core.object.Embed;
-import discord4j.core.object.entity.Message;
-import discord4j.core.object.entity.User;
-import discord4j.core.object.entity.channel.MessageChannel;
-import discord4j.discordjson.json.EmbedData;
-import discord4j.discordjson.json.MessageData;
-import discord4j.rest.entity.RestChannel;
-import discord4j.rest.entity.RestMessage;
-import discord4j.rest.util.Color;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.dextra.scoremodels.entity.CustomCommand;
 import br.com.dextra.scoremodels.repository.CommandRepository;
+import discord4j.core.object.entity.Message;
 import reactor.core.publisher.Mono;
-
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public abstract class MessageListener {
 
@@ -31,72 +19,69 @@ public abstract class MessageListener {
     @Autowired
     private CommandRepository commandRepository;
 
-    public Mono<Void> processCommand(Message eventMessage){
 
-        Optional<User> author = eventMessage.getAuthor();
-        String content = eventMessage.getContent().toLowerCase();
+    public Mono<Void> processCommand(Message eventMessage) {
+//    	logger.info("Lista de todos os comandos: " + all.size());
+        return Mono.just(eventMessage)
+          .filter(message -> message.getAuthor().map(user -> !user.isBot()).orElse(false))
+          .filter(message -> message.getContent().equalsIgnoreCase("-ls"))
+          .flatMap(Message::getChannel)
+          .flatMap(channel -> channel.createMessage("Things to do today:\n - write a bot\n - eat lunch\n - play a game"))
+          .then();
+    }
 
-        if(author.isPresent()){
-            User user = author.get();
+    /*
+
+    public Mono<Void> processCommand(Message eventMessage) {
+
+        Optional<User> autorMensagem = eventMessage.getAuthor();
+        String comandoDigitado = eventMessage.getContent().toLowerCase();
+
+        if (autorMensagem.isPresent()) {
+            User user = autorMensagem.get();
             logger.info("Message Owner ID " + user.getId());
             logger.info("Mention : " + user.getMention());
 
-            if(!user.isBot()){
-
-                String resp = "";
+            if (!user.isBot()) {
+                String retornoComandos = "";
 
                 List<CustomCommand> all = commandRepository.findAll();
 
-                logger.info("All Message in Repo : " + all.size());
+                logger.info("Lista de todos os comandos: " + all.size());
 
-                if(content.contains("!list-cmd")){
-                    resp = all.stream().map(CustomCommand::getId).collect(Collectors.joining("\n"));
-                    if(resp.length()>0){
-                        resp = "List of available commands are : \n" + resp;
-                    }
-                }else if(content.startsWith("!add-cmd")){
-                    String[] splittedContent = content.split(" ");
-                    if(splittedContent[0].equals("!add-cmd") && splittedContent.length >3){
-                        String identifier = splittedContent[1].toLowerCase();
-                        List<CustomCommand> cmdList = commandRepository.getByIdentifierEquals(identifier);
-                        if(cmdList.size()==0){
-                            CustomCommand customCommand = new CustomCommand(identifier,content.substring(splittedContent[0].length() + splittedContent[1].length()+1),user.getId().asLong(),false);
-                            commandRepository.save(customCommand);
-                            resp = "Command added Successfully";
-                        }else {
-                            resp = cmdList.size() + " existing command found with name : "+identifier;
-                        }
-                    }else{
-                        resp = "For using !add cmd message should be in below format \n !add <trigger_name> <message>";
-                    }
-                }else{
+                if (comandoDigitado.contains("-ls")) {
+                    retornoComandos = listarTodosComandos(all);
+                }
 
-                    int i = content.indexOf(" ");
-                    if(i != -1){
+                /*
+                else {
+                    int i = comandoDigitado.indexOf(" ");
+                    if (i != -1) {
                         Set<String> dbIdentifier = all.stream().map(CustomCommand::getIdentifier).collect(Collectors.toSet());
 
-                        Set<String> collect1 = Arrays.stream(content.split(" ")).collect(Collectors.toSet());
+                        Set<String> collect1 = Arrays.stream(comandoDigitado.split(" ")).collect(Collectors.toSet());
                         for (String c : collect1) {
-                            if(dbIdentifier.contains(c.toLowerCase())){
+                            if (dbIdentifier.contains(c.toLowerCase())) {
                                 List<CustomCommand> byIdentifierEquals = commandRepository.getByIdentifierEquals(c);
                                 CustomCommand customCommand = byIdentifierEquals.get(0);
-                                resp = customCommand.getMessage();
+                                retornoComandos = customCommand.getMessage();
                             }
                         }
-                    }else{
+                    }
+                    else{
                         Set<String> dbIdentifier = all.stream().map(CustomCommand::getIdentifier).collect(Collectors.toSet());
                         for (String s : dbIdentifier) {
-                            if (s.contains(content.toLowerCase())){
-                                List<CustomCommand> byIdentifierEquals = commandRepository.getByIdentifierEquals(content.toLowerCase());
+                            if (s.contains(comandoDigitado.toLowerCase())) {
+                                List<CustomCommand> byIdentifierEquals = commandRepository.getByIdentifierEquals(comandoDigitado.toLowerCase());
                                 CustomCommand customCommand = byIdentifierEquals.get(0);
-                                resp = customCommand.getMessage();
+                                retornoComandos = customCommand.getMessage();
                             }
                         }
                     }
                 }
 
-                if (resp.length() != 0){
-                    String finalResp = resp;
+                if (retornoComandos.length() != 0) {
+                    String finalResp = retornoComandos;
                     logger.error("Embeeded will be executed!!");
 
                     return eventMessage.getChannel().map(messageChannel -> messageChannel.createEmbed(spec -> spec.setColor(Color.GREEN)
@@ -111,6 +96,15 @@ public abstract class MessageListener {
 
         return Mono.empty();
 
-    }
+    }*/
+
+	private String listarTodosComandos(List<CustomCommand> all) {
+		String retornoComandos;
+		retornoComandos = all.stream().map(CustomCommand::getComando).collect(Collectors.joining("\n"));
+		if (retornoComandos.length()>0) {
+		    retornoComandos = "Lista de todos os comandos: \n" + retornoComandos;
+		}
+		return retornoComandos;
+	}
 
 }
