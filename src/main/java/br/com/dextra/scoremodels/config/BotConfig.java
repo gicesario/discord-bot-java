@@ -2,8 +2,6 @@ package br.com.dextra.scoremodels.config;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +15,8 @@ import discord4j.core.event.domain.Event;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "config")
+@ConfigurationProperties
 public class BotConfig {
-
-    private static final Logger log = LoggerFactory.getLogger(BotConfig.class );
 
     private String token;
 
@@ -41,11 +37,21 @@ public class BotConfig {
                   .subscribe();
             }
         }
-        catch ( Exception exception ) {
-            log.error( "Be sure to use a valid bot token!", exception );
+        catch ( Exception e ) {
+            e.printStackTrace();
         }
 
         return client;
     }
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+
 }
 

@@ -1,18 +1,13 @@
 package br.com.dextra.scoremodels.event;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import discord4j.core.object.entity.Message;
 import reactor.core.publisher.Mono;
 
 public abstract class MessageListener {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Mono<Void> processCommand(Message eventMessage) {
-    	logger.info("Lista de todos os comandos: ");
-        return Mono.just(eventMessage)
+    	return Mono.just(eventMessage)
           .filter(message -> message.getAuthor().map(user -> !user.isBot()).orElse(false))
           .filter(message -> message.getContent().equalsIgnoreCase("-ls"))
           .flatMap(Message::getChannel)
