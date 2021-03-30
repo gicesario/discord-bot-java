@@ -1,4 +1,5 @@
-token: 'ODI2NDYwNTcyMzM3NzAwOTA0.YGMzYw.4aUrZ2BHXa4Q3ftJlkEGBA-r_U8'
+config:
+    token: 'ODI2NDYwNTcyMzM3NzAwOTA0.YGMzYw.4aUrZ2BHXa4Q3ftJlkEGBA-r_U8'
 
 #server:
 #  address: 127.0.0.1

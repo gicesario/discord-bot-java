@@ -1,10 +1,11 @@
 package br.com.dextra.scoremodels.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.mongodb.lang.NonNull;
+public class CustomCommand {
+	
+}
+
+/*
 
 @Document
 public class CustomCommand {
@@ -45,15 +46,8 @@ public class CustomCommand {
 		this.argumentos = argumentos;
 	}
 
-
-
-
 	@Override
 	public String toString() {
 		return "Comando [" + comando + ", argumentos=" + argumentos + "]";
 	}
-
-
-
-
-}
+}*/

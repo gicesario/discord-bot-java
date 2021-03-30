@@ -1,14 +1,8 @@
 package br.com.dextra.scoremodels.event;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.dextra.scoremodels.entity.CustomCommand;
-import br.com.dextra.scoremodels.repository.CommandRepository;
 import discord4j.core.object.entity.Message;
 import reactor.core.publisher.Mono;
 
@@ -16,12 +10,8 @@ public abstract class MessageListener {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private CommandRepository commandRepository;
-
-
     public Mono<Void> processCommand(Message eventMessage) {
-//    	logger.info("Lista de todos os comandos: " + all.size());
+    	logger.info("Lista de todos os comandos: ");
         return Mono.just(eventMessage)
           .filter(message -> message.getAuthor().map(user -> !user.isBot()).orElse(false))
           .filter(message -> message.getContent().equalsIgnoreCase("-ls"))
@@ -96,7 +86,7 @@ public abstract class MessageListener {
 
         return Mono.empty();
 
-    }*/
+    }
 
 	private String listarTodosComandos(List<CustomCommand> all) {
 		String retornoComandos;
@@ -105,6 +95,6 @@ public abstract class MessageListener {
 		    retornoComandos = "Lista de todos os comandos: \n" + retornoComandos;
 		}
 		return retornoComandos;
-	}
+	}*/
 
 }

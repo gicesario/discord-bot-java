@@ -1,10 +1,11 @@
-package br.com.dextra.scoremodels;
+package br.com.dextra.scoremodels.config;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,11 +16,12 @@ import discord4j.core.event.domain.Event;
 
 
 @Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "config")
 public class BotConfig {
 
-    private static final Logger log = LoggerFactory.getLogger( BotConfig.class );
+    private static final Logger log = LoggerFactory.getLogger(BotConfig.class );
 
-    @Value("${token}")
     private String token;
 
     @Bean
