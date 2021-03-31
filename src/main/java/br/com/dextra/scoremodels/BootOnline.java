@@ -1,12 +1,12 @@
-package br.com.dextra.scoremodels.controller;
+package br.com.dextra.scoremodels;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CommandController {
+public class BootOnline {
 	@GetMapping("/")
-	String inicio() {
-		return "inicio";
-	}
+	  public String bootOnline() {
+        return "Boot ta on";
+    }
 }
