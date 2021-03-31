@@ -1,7 +1,10 @@
-package br.com.dextra.scoremodels.event;
+package br.com.dextra.scoremodels.event.service;
 
 import discord4j.core.event.domain.message.MessageUpdateEvent;
 import org.springframework.stereotype.Service;
+
+import br.com.dextra.scoremodels.event.EventListener;
+import br.com.dextra.scoremodels.event.MessageListener;
 import reactor.core.publisher.Mono;
 
 @Service

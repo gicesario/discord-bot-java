@@ -1,4 +1,4 @@
-package br.com.dextra.scoremodels.config;
+package br.com.dextra.scoremodels;
 
 import java.util.List;
 
@@ -10,12 +10,11 @@ import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.Event;
 
 @Configuration
-public class BotConfig {
+public class Configuracao {
 
     private String token = System.getenv().get("token");
 
-
-    public <T extends Event> GatewayDiscordClient gatewayDiscordClient(List<EventListener<T>> eventListeners) {
+    public <T extends Event> GatewayDiscordClient getGatewayDiscord(List<EventListener<T>> eventListeners) {
 
         GatewayDiscordClient client = DiscordClientBuilder.create(token).build().login().block();
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CommandController {
 	@GetMapping("/")
-	String oi() {
-		return "oi";
+	String inicio() {
+		return "inicio";
 	}
 }

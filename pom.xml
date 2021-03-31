@@ -62,14 +62,9 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>br.com.dextra.scoremodels.ScoreModelsApplication</mainClass>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>				
 			</plugin>
 		</plugins>
 	</build>
