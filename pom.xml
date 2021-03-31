@@ -61,38 +61,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<configuration>					
+				<configuration>
+					<mainClass>br.com.dextra.scoremodels.ScoreModelsApplication</mainClass>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<mainClass>br.com.dextra.scoremodels.ScoreModelsApplication</mainClass>
-									<groupId>br.com.dextra.scoremodels</groupId>
-									<artifactId>scoremodels</artifactId>
-									<version>1.0.0</version>
-									<destFileName>scoremodels.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-
+			</plugin>			
 		</plugins>
 	</build>
 
