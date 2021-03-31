@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/scoremodels-1.0.0.jar
+web: java -jar -Dserver.port=$PORT target/scoremodels-1.0.0.jar
