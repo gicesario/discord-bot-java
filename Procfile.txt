@@ -1,1 +1,1 @@
-worker: java -cp target/classes/:target/dependency/* br.com.dextra.scoremodels
+web: java -jar target/scoremodels-1.0.0.jar
