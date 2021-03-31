@@ -2,7 +2,6 @@ package br.com.dextra.scoremodels.config;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.dextra.scoremodels.event.EventListener;
@@ -15,29 +14,19 @@ public class BotConfig {
 
     private String token = System.getenv().get("token");
 
-    @Bean
+
     public <T extends Event> GatewayDiscordClient gatewayDiscordClient(List<EventListener<T>> eventListeners) {
-        GatewayDiscordClient client = null;
 
-        try {
-        	System.out.println(token);
-            client = DiscordClientBuilder.create(token)
-              .build()
-              .login()
-              .block();
+        GatewayDiscordClient client = DiscordClientBuilder.create(token).build().login().block();
 
-            for(EventListener<T> listener : eventListeners) {
-                client.on(listener.getEventType())
-                  .flatMap(listener::execute)
-                  .onErrorResume(listener::handleError)
-                  .subscribe();
-            }
-        }
-        catch ( Exception e ) {
-            e.printStackTrace();
-        }
+        for (EventListener<T> listener : eventListeners) {
+           client.on(listener.getEventType())
+             .flatMap(listener::execute)
+             .onErrorResume(listener::handleError)
+             .subscribe();
+       }
 
-        return client;
+       return client;
     }
 
 }
