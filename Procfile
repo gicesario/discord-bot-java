@@ -1,1 +1,1 @@
-web: java -jar target/dependency/scoremodels.jar --port $PORT target/*.war
+web: java -jar target/scoremodels-1.0.0.jar 
