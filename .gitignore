@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+.metadata
+.env
+
 ### STS ###
 .apt_generated
 .classpath
@@ -13,12 +16,12 @@ target/
 .springBeans
 .sts4-cache
 
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-.metadata
 
 ### NetBeans ###
 /nbproject/private/
