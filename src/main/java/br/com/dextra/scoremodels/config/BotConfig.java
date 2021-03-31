@@ -10,11 +10,10 @@ import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.Event;
 
-
 @Configuration
 public class BotConfig {
 
-    private String token = "ODI2NDYwNTcyMzM3NzAwOTA0.YGMzYw.4aUrZ2BHXa4Q3ftJlkEGBA-r_U8";
+    private String token = System.getenv().get("token");
 
     @Bean
     public <T extends Event> GatewayDiscordClient gatewayDiscordClient(List<EventListener<T>> eventListeners) {
@@ -39,15 +38,6 @@ public class BotConfig {
 
         return client;
     }
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
 
 }
 
