@@ -2,7 +2,6 @@ package br.com.dextra.scoremodels.config;
 
 import java.util.List;
 
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +11,6 @@ import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.Event;
 
 @Configuration
-@EnableConfigurationProperties
 public class BotConfig {
 
     private String token = System.getenv().get("token");
@@ -22,6 +20,7 @@ public class BotConfig {
         GatewayDiscordClient client = null;
 
         try {
+        	System.out.println(token);
             client = DiscordClientBuilder.create(token)
               .build()
               .login()
