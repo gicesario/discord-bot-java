@@ -8,6 +8,6 @@ public class BootOnline {
 
 	@GetMapping("/")
 	  public String bootOnline() {
-        return "Boot ta on";
+        return "Score Models Bot ta on";
     }
 }

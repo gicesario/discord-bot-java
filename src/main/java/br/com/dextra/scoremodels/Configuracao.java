@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.dextra.scoremodels.event.EventListener;
+import br.com.dextra.scoremodels.event.ManipuladorEventos;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.Event;
@@ -16,15 +16,15 @@ public class Configuracao {
     private final String token = System.getenv().get("token");
 
     @Bean
-    public <T extends Event> GatewayDiscordClient getGatewayDiscord(List<EventListener<T>> eventListeners) {
+    public <T extends Event> GatewayDiscordClient getGatewayDiscord(List<ManipuladorEventos<T>> eventosRecebidos) {
 
     	System.out.println("gateway");
         GatewayDiscordClient client = DiscordClientBuilder.create(token).build().login().block();
 
-        for (EventListener<T> listener : eventListeners) {
-           client.on(listener.getEventType())
-             .flatMap(listener::execute)
-             .onErrorResume(listener::handleError)
+        for (ManipuladorEventos<T> evento : eventosRecebidos) {
+           client.on(evento.getTipoEvento())
+             .flatMap(evento::executarComando)
+             .onErrorResume(evento::handleError)
              .subscribe();
        }
 
