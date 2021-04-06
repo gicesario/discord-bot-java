@@ -1,7 +1,6 @@
 package br.com.dextra.scoremodels.event;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.object.reaction.ReactionEmoji;
 import reactor.core.publisher.Mono;
 
 public class ProcessaMensagem {
@@ -18,8 +17,6 @@ public class ProcessaMensagem {
 	  	          .flatMap(criarMensagem -> criarMensagem.createEmbed(spec -> {
 	  	        	cmd.criarEmbed(mensagem, spec);
 	  	          }))
-	  	          .flatMap(msg -> mensagem.addReaction(ReactionEmoji.unicode("\u1F44D")))
-	  	          .flatMap(msg -> mensagem.addReaction(ReactionEmoji.unicode("\u1F44E")))
 	  	          .then();
     }
 
