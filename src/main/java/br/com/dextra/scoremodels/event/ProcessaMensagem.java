@@ -9,6 +9,7 @@ public class ProcessaMensagem {
     public Mono<Void> processarComandoRecebido(Message mensagem) {
 
     	TipoComando cmd = CommandosUtils.getComando(mensagem.getContent().toUpperCase());
+    	mensagem.getAuthor().stream().forEach(m -> System.out.println(m.getUsername()));
     	return Mono.just(mensagem)
 	  	          .filter(msg -> msg.getAuthor().map(user -> !user.isBot()).orElse(false))
 	  	          .filter(msg -> msg.getContent().toUpperCase().contains(cmd.name()))

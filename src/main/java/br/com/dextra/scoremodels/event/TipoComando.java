@@ -38,7 +38,7 @@ public enum TipoComando implements ComandoProcessor {
 	LUPTO {
 		@Override
 		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
-			msg.getAuthor().stream().forEach(m -> System.out.println(m.getUsername()));
+
 			spec.setColor(Color.BLUE)
 			.setTitle("Score Models | Influenciadores:")
 			//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
@@ -46,7 +46,7 @@ public enum TipoComando implements ComandoProcessor {
 		    .addField("Sua pergunta", arg, false)
 		    .setFooter("Influenciadores", msg.getAuthor().get().getAvatarUrl())
 		    .setTimestamp(Instant.now());
-		return arg;
+			return arg;
 		}
 		// i look up to the
 	}
