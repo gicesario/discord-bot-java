@@ -8,7 +8,6 @@ import reactor.core.publisher.Mono;
 @Service
 public class Evento implements ManipuladorEventos<MessageCreateEvent> {
 
-
     @Override
     public Class<MessageCreateEvent> getTipoEvento() {
         return MessageCreateEvent.class;
