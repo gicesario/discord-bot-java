@@ -14,8 +14,8 @@ public class ProcessaMensagem {
 	  	          .filter(msg -> msg.getAuthor().map(user -> !user.isBot()).orElse(false))
 	  	          .filter(msg -> msg.getContent().equalsIgnoreCase(prefix + cmd.name()))
 	  	          .flatMap(Message::getChannel)
-	  	          .flatMap(criarMensagem -> criarMensagem.createEmbed(s -> {
-	  	        	cmd.criarEmbed(s);
+	  	          .flatMap(criarMensagem -> criarMensagem.createEmbed(spec -> {
+	  	        	cmd.criarEmbed(mensagem, spec);
 	  	          }))
 	  	          .then();
     }
