@@ -28,6 +28,7 @@ public class ProcessaMensagem {
     private TipoComando getComando(String mensagem) {
     	try {
 	    	if (mensagem.startsWith(prefix) && mensagem.contains(" ")) {
+	    		System.out.println(obterNomeComando(mensagem));
 	    		return Enum.valueOf(TipoComando.class, obterNomeComando(mensagem));
 	    	}
     	}
