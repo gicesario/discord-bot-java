@@ -15,8 +15,8 @@ public enum TipoComando implements ComandoProcessor {
 			spec.setColor(Color.YELLOW)
 				.setTitle("Score Models | Help:")
 			    .addField("-help", "exibe todos os comandos disponíveis no bot", false)
-				.addField("-qoc", "questão a ser debatida na hora de por café!", false)
-				.addField("-lupto", "quem foi o(a) colega ou líder que te inspirou dentro da empresa esse mês?", false)
+				.addField("-qoc pergunta", "questão a ser debatida na hora de por café!", false)
+				.addField("-lupto colega", "quem foi o(a) colega ou líder que te inspirou dentro da empresa esse mês?", false)
 			    .setFooter("Help", msg.getAuthor().get().getAvatarUrl())
 			    .setTimestamp(Instant.now());
 		}

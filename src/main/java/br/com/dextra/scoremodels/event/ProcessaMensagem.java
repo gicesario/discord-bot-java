@@ -10,6 +10,7 @@ public class ProcessaMensagem {
     public Mono<Void> processarComandoRecebido(Message mensagem) {
 
     	TipoComando cmd = getComando(mensagem.getContent().toUpperCase());
+    	System.out.println(cmd.name());
     	return Mono.just(mensagem)
 	  	          .filter(msg -> msg.getAuthor().map(user -> !user.isBot()).orElse(false))
 	  	          .flatMap(Message::getChannel)
@@ -26,7 +27,7 @@ public class ProcessaMensagem {
 
     private TipoComando getComando(String mensagem) {
     	try {
-	    	if (mensagem.trim().startsWith(prefix) && mensagem.contains(" ")) {
+	    	if (mensagem.startsWith(prefix) && mensagem.contains(" ")) {
 	    		return Enum.valueOf(TipoComando.class, obterNomeComando(mensagem));
 	    	}
     	}
