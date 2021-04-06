@@ -13,11 +13,12 @@ public enum TipoComando implements ComandoProcessor {
 		public void criarEmbed(Message msg, EmbedCreateSpec spec) {
 			spec.setColor(Color.YELLOW)
 				.setTitle("Score Models | Help:")
+				.setImage(msg.getAuthor().get().getAvatarUrl())
 			    .addField("-help", "exibe todos os comandos disponíveis no bot", false)
 				.addField("-qow", "Question of the Week!", false)
 			    .setFooter("", msg.getAuthor().get().getAvatarUrl())
 			    .setTimestamp(Instant.now());
-			msg.addReaction(ReactionEmoji.unicode("U+1F44D"));
+			msg.addReaction(ReactionEmoji.unicode("\u1F44D"));
 		}
 	}
 
