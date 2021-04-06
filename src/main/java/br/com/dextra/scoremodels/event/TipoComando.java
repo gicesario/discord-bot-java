@@ -38,7 +38,6 @@ public enum TipoComando implements ComandoProcessor {
 	LUPTO {
 		@Override
 		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
-
 			spec.setColor(Color.BLUE)
 			.setTitle("Score Models | Influenciadores:")
 			//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
