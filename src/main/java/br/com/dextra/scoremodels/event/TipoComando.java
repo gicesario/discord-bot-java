@@ -9,7 +9,7 @@ public enum TipoComando implements ComandoProcessor {
 
 		@Override
 		public EmbedCreateSpec spec(Message mensagem) {
-			return new EmbedCreateSpec().setAuthor(mensagem.getAuthor().get().getUsername(), mensagem.getAuthor().get().getAvatarUrl(), mensagem.getAuthor().get().getAvatarUrl())
+			return new EmbedCreateSpec()
 					.setColor(Color.YELLOW)
 					.setDescription("HELP!")
 					.addField("-help", "exibe todos os comandos disponíveis no bot", false)
