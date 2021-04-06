@@ -15,7 +15,7 @@ public class ProcessaMensagem {
 	  	          .filter(msg -> msg.getContent().equalsIgnoreCase(prefix + cmd.name()))
 	  	          .flatMap(Message::getChannel)
 	  	          .flatMap(criarMensagem -> criarMensagem.createEmbed(spec -> {
-	  	        	cmd.spec(mensagem);
+	  	        	cmd.spec();
 	  	          }))
 	  	          .then();
     }

@@ -2,7 +2,6 @@ package br.com.dextra.scoremodels.event;
 
 import java.util.function.Consumer;
 
-import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import discord4j.rest.util.Color;
 
@@ -10,7 +9,7 @@ public enum TipoComando implements ComandoProcessor {
 	HELP {
 
 		@Override
-		public Consumer<EmbedCreateSpec> spec(Message mensagem) {
+		public Consumer<EmbedCreateSpec> spec() {
 		     Consumer<EmbedCreateSpec> consumer = spec -> {
 		    	 spec.setColor(Color.YELLOW)
 		    	 .setDescription("Score Models | Help")
