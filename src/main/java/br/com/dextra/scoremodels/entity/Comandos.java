@@ -1,7 +1,5 @@
 package br.com.dextra.scoremodels.entity;
 
-
-
 public class Comandos {
 
 	private String id;

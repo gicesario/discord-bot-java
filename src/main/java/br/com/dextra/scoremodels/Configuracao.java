@@ -18,13 +18,12 @@ public class Configuracao {
     @Bean
     public <T extends Event> GatewayDiscordClient getGatewayDiscord(List<ManipuladorEventos<T>> eventosRecebidos) {
 
-    	System.out.println("gateway");
         GatewayDiscordClient client = DiscordClientBuilder.create(token).build().login().block();
 
         for (ManipuladorEventos<T> evento : eventosRecebidos) {
            client.on(evento.getTipoEvento())
              .flatMap(evento::executarComando)
-             .onErrorResume(evento::handleError)
+             .onErrorResume(evento::tratarErros)
              .subscribe();
        }
 

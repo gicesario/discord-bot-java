@@ -9,7 +9,7 @@ public interface ManipuladorEventos <T extends Event> {
 
     Mono<Void> executarComando(T evento);
 
-    default Mono<Void> handleError(Throwable erro) {
+    default Mono<Void> tratarErros(Throwable erro) {
     	erro.printStackTrace();
         return Mono.empty();
     }

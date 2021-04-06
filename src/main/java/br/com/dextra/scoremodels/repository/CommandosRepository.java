@@ -3,6 +3,7 @@ package br.com.dextra.scoremodels.repository;
 public interface CommandosRepository {
 
 }
+
 /*
 
 @Repository

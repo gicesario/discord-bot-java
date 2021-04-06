@@ -2,13 +2,13 @@ package br.com.dextra.scoremodels.event.service;
 
 import org.springframework.stereotype.Service;
 
-import br.com.dextra.scoremodels.event.GerenciadorMensagens;
 import br.com.dextra.scoremodels.event.ManipuladorEventos;
+import br.com.dextra.scoremodels.event.ProcessaMensagem;
 import discord4j.core.event.domain.message.MessageUpdateEvent;
 import reactor.core.publisher.Mono;
 
 @Service
-public class AtualizadorMensagem extends GerenciadorMensagens implements ManipuladorEventos<MessageUpdateEvent> {
+public class AtualizaMensagem implements ManipuladorEventos<MessageUpdateEvent> {
 
     @Override
     public Class<MessageUpdateEvent> getTipoEvento() {
@@ -20,6 +20,6 @@ public class AtualizadorMensagem extends GerenciadorMensagens implements Manipul
         return Mono.just(evento)
                 .filter(MessageUpdateEvent::isContentChanged)
                 .flatMap(MessageUpdateEvent::getMessage)
-                .flatMap(super::processarComandoRecebido);
+                .flatMap(new ProcessaMensagem()::processarComandoRecebido);
     }
 }
