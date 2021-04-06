@@ -7,16 +7,15 @@ import discord4j.rest.util.Color;
 
 public enum TipoComando implements ComandoProcessor {
 	HELP {
-
 		@Override
 		public Consumer<EmbedCreateSpec> spec() {
-		     Consumer<EmbedCreateSpec> consumer = spec -> {
+			return spec -> {
 		    	 spec.setColor(Color.YELLOW)
-		    	 .setDescription("Score Models | Help")
+		    	 .setDescription("Help")
 				 .addField("-help", "exibe todos os comandos disponíveis no bot", false)
 				 .addField("-qow", "Question of the Week!", false);
 		     };
-		     return consumer;
+
 		}
 	}
 
