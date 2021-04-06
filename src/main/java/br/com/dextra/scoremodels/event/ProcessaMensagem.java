@@ -22,7 +22,7 @@ public class ProcessaMensagem {
 
 
     private String obterNomeComando(String mensagem) {
-    	return mensagem.split(" ")[0];
+    	return mensagem.split(" ")[0].trim().replace(prefix, "");
     }
 
     private TipoComando getComando(String mensagem) {
