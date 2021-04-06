@@ -13,7 +13,6 @@ public enum TipoComando implements ComandoProcessor {
 		public Consumer<EmbedCreateSpec> spec(Message mensagem) {
 		     Consumer<EmbedCreateSpec> consumer = spec -> {
 		    	 spec.setColor(Color.YELLOW)
-		    	 .setAuthor(mensagem.getAuthor().get().getUsername(), "#", mensagem.getAuthor().get().getAvatarUrl())
 		    	 .setDescription("Score Models | Help")
 				 .addField("-help", "exibe todos os comandos disponíveis no bot", false)
 				 .addField("-qow", "Question of the Week!", false);
