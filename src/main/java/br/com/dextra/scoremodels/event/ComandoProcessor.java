@@ -7,6 +7,6 @@ import discord4j.core.spec.EmbedCreateSpec;
 
 public interface ComandoProcessor {
 
-	public Consumer<EmbedCreateSpec> spec(Message mensagem, Consumer<EmbedCreateSpec> embed);
+	public Consumer<EmbedCreateSpec> spec(Message mensagem);
 
 }
