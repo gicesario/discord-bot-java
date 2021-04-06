@@ -1,5 +1,6 @@
 package br.com.dextra.scoremodels.event;
 
+import java.io.File;
 import java.time.Instant;
 
 import org.springframework.boot.autoconfigure.web.WebProperties.Resources;
@@ -25,9 +26,13 @@ public enum TipoComando implements ComandoProcessor {
 	QOC {
 		@Override
 		public void criarEmbed(Message msg, EmbedCreateSpec spec) {
+			System.out.println(Resources.class.getResource("img/qoc-logo.png").getPath());
+			if (new File(Resources.class.getResource("img/qoc-logo.png").getPath()).exists()) {
+				System.out.println(Resources.class.getResource("img/qoc-logo.png").getPath());
+			}
 			spec.setColor(Color.BROWN)
 				.setTitle("Score Models | Question da hora do café:")
-				.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
+				//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
 				.setDescription("QOC é uma pergunta semanal a ser debatida na hora do café.")
 			    .addField("-qoc", "deixe sua pergunta...", false)
 			    .setFooter("Café", msg.getAuthor().get().getAvatarUrl())
