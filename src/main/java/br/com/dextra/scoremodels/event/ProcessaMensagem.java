@@ -1,7 +1,6 @@
 package br.com.dextra.scoremodels.event;
 
 import discord4j.core.object.entity.Message;
-import discord4j.rest.util.Color;
 import reactor.core.publisher.Mono;
 
 public class ProcessaMensagem {
@@ -15,11 +14,8 @@ public class ProcessaMensagem {
 	  	          .filter(msg -> msg.getAuthor().map(user -> !user.isBot()).orElse(false))
 	  	          .filter(msg -> msg.getContent().equalsIgnoreCase(prefix + cmd.name()))
 	  	          .flatMap(Message::getChannel)
-	  	          .flatMap(criarMensagem -> criarMensagem.createEmbed(spec -> {
-	  	        	 spec.setColor(Color.YELLOW)
-			    	 .setDescription("Help")
-					 .addField("-help", "exibe todos os comandos disponíveis no bot", false)
-					 .addField("-qow", "Question of the Week!", false);
+	  	          .flatMap(criarMensagem -> criarMensagem.createEmbed(s -> {
+	  	        	cmd.criarEmbed(s);
 	  	          }))
 	  	          .then();
     }

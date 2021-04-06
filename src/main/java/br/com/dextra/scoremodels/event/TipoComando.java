@@ -1,21 +1,16 @@
 package br.com.dextra.scoremodels.event;
 
-import java.util.function.Consumer;
-
 import discord4j.core.spec.EmbedCreateSpec;
 import discord4j.rest.util.Color;
 
 public enum TipoComando implements ComandoProcessor {
 	HELP {
 		@Override
-		public Consumer<EmbedCreateSpec> spec() {
-			return spec -> {
-		    	 spec.setColor(Color.YELLOW)
+		public void criarEmbed(EmbedCreateSpec spec) {
+			spec.setColor(Color.YELLOW)
 		    	 .setDescription("Help")
 				 .addField("-help", "exibe todos os comandos disponíveis no bot", false)
 				 .addField("-qow", "Question of the Week!", false);
-		     };
-
 		}
 	}
 
