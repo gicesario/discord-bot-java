@@ -9,7 +9,7 @@ import discord4j.rest.util.Color;
 public enum TipoComando implements ComandoProcessor {
 	HELP {
 		@Override
-		public void criarEmbed(Message msg, EmbedCreateSpec spec) {
+		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
 			spec.setColor(Color.YELLOW)
 				.setTitle("Score Models | Help:")
 			    .addField("-help", "exibe todos os comandos disponíveis no bot", false)
@@ -17,19 +17,21 @@ public enum TipoComando implements ComandoProcessor {
 				.addField("-lupto colega", "quem foi o(a) colega ou líder que te inspirou dentro da empresa esse mês?", false)
 			    .setFooter("Help", msg.getAuthor().get().getAvatarUrl())
 			    .setTimestamp(Instant.now());
+			return arg;
 		}
 	},
 
 	QOC {
 		@Override
-		public void criarEmbed(Message msg, EmbedCreateSpec spec) {
+		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
 			spec.setColor(Color.BROWN)
 				.setTitle("Score Models | Question da hora do café:")
 				//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
 				.setDescription("QOC é uma pergunta semanal a ser debatida na hora do café.")
-			    .addField("-qoc", "deixe sua pergunta...", false)
+			    .addField("Sua pergunta", arg, false)
 			    .setFooter("Café", msg.getAuthor().get().getAvatarUrl())
 			    .setTimestamp(Instant.now());
+			return arg;
 		}
 	},
 /*
