@@ -16,9 +16,11 @@ public class ProcessaMensagem {
 	  	          .flatMap(Message::getChannel)
 	  	          .flatMap(criarMensagem -> criarMensagem.createEmbed(spec -> {
 	  	        	cmd.criarEmbed(mensagem, spec);
+
 	  	          }))
 	  	          .then();
     }
+
 
     private String obterNomeComando(String mensagem) {
     	return mensagem.split(" ")[0];
