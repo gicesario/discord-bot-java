@@ -34,6 +34,22 @@ public enum TipoComando implements ComandoProcessor {
 			return arg;
 		}
 	},
+
+	LUPTO {
+		@Override
+		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
+			msg.getAuthor().stream().forEach(m -> System.out.println(m.getUsername()));
+			spec.setColor(Color.BLUE)
+			.setTitle("Score Models | Influenciadores:")
+			//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
+			.setDescription("quem foi o(a) colega ou líder que te inspirou dentro da empresa esse mês?")
+		    .addField("Sua pergunta", arg, false)
+		    .setFooter("Influenciadores", msg.getAuthor().get().getAvatarUrl())
+		    .setTimestamp(Instant.now());
+		return arg;
+		}
+		// i look up to the
+	}
 /*
 	CLIMA {
 		@Override
@@ -52,13 +68,5 @@ public enum TipoComando implements ComandoProcessor {
 		}
 	},
 
-	LUPTO {
-		// i look up to the
-
-		@Override
-		public Mono<Void> executar(Message msg) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	},*/
+	*/
 }
