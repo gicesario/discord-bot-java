@@ -2,6 +2,7 @@ package br.com.dextra.scoremodels.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import br.com.dextra.scoremodels.event.TipoComando;
 import discord4j.core.object.entity.Guild;
@@ -34,13 +35,15 @@ public class CommandosUtils {
     	return TipoComando.HELP;
     }
 
-    public static List<Member> getMembros(Message mensagem) {
+    public static Optional<List<Member>> getMembros(Message mensagem) {
     	Flux<Guild> g = mensagem.getClient().getGuilds();
     	List<Guild> listaGuild = g.collectList().block();
     	if (listaGuild.isEmpty()) {
-    		return new ArrayList<Member>();
+    		return Optional.of(new ArrayList<Member>());
     	}
-    	return listaGuild.get(0).getMembers().collectSortedList().block();
+    	List<Member> listaMembros = new ArrayList<Member>();
+    	listaGuild.forEach(item -> listaMembros.addAll(item.getMembers().collectSortedList().block()));
+    	return Optional.of(listaMembros);
     }
 
 
