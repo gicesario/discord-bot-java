@@ -11,6 +11,7 @@ public enum TipoComando implements ComandoProcessor {
 		    	 .setDescription("Help")
 				 .addField("-help", "exibe todos os comandos disponíveis no bot", false)
 				 .addField("-qow", "Question of the Week!", false);
+			System.out.println(spec);
 		}
 	}
 
