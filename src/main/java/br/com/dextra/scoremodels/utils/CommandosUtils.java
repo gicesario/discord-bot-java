@@ -8,6 +8,7 @@ import br.com.dextra.scoremodels.event.TipoComando;
 import discord4j.core.object.entity.Guild;
 import discord4j.core.object.entity.Member;
 import discord4j.core.object.entity.Message;
+import discord4j.core.object.entity.User;
 import reactor.core.publisher.Flux;
 
 public class CommandosUtils {
@@ -36,13 +37,19 @@ public class CommandosUtils {
     }
 
     public static Optional<List<Member>> getMembros(Message mensagem) {
+    	Flux<User> us = mensagem.getClient().getUsers();
+
+    	us.collectList().block().forEach(u -> {
+    		System.out.println("\nUsuario: " + u.getDiscriminator() + " " + u.getUsername() + " " + u.getTag());
+    	});
+
     	Flux<Guild> g = mensagem.getClient().getGuilds();
     	List<Guild> listaGuild = g.collectList().block();
     	if (listaGuild.isEmpty()) {
     		return Optional.of(new ArrayList<Member>());
     	}
     	List<Member> listaMembros = new ArrayList<Member>();
-    	listaGuild.forEach(item -> listaMembros.addAll(item.getMembers().collectSortedList().block()));
+    	listaGuild.forEach(item -> listaMembros.addAll(item.getMembers().collectList().block()));
     	return Optional.of(listaMembros);
     }
 
