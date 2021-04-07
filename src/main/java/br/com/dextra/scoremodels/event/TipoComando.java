@@ -28,7 +28,7 @@ public enum TipoComando implements ComandoProcessor {
 				.setTitle("Score Models | Question da hora do café:")
 				//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
 				.setDescription("QOC é uma pergunta semanal a ser debatida na hora do café.")
-			    .addField("Sua pergunta", arg, false)
+			    .addField("Sua pergunta:", arg, false)
 			    .setFooter("Café", msg.getAuthor().get().getAvatarUrl())
 			    .setTimestamp(Instant.now());
 			return arg;
@@ -42,22 +42,46 @@ public enum TipoComando implements ComandoProcessor {
 			.setTitle("Score Models | Influenciadores:")
 			//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
 			.setDescription("quem foi o(a) colega ou líder que te inspirou dentro da empresa esse mês?")
-		    .addField("Sua pergunta", arg, false)
+		    .addField("Escolhido:", arg, false)
 		    .setFooter("Influenciadores", msg.getAuthor().get().getAvatarUrl())
 		    .setTimestamp(Instant.now());
 			return arg;
 		}
 		// i look up to the
-	}
-/*
-	CLIMA {
-		@Override
-		public Mono<Void> executar(Message msg) {
-
-			return null;
-		}
 	},
 
+	CLIMA {
+		@Override
+		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
+			spec.setColor(Color.GREEN)
+			.setTitle("Score Models | Pergunta de Clima:")
+			.setDescription("Pergunta do dia:")
+			.addField(getFieldNome(arg), getFieldValor(arg), false)
+		    .setFooter("Resposta: S|N", msg.getAuthor().get().getAvatarUrl())
+		    .setTimestamp(Instant.now());
+			return arg;
+		}
+
+		private boolean existeArgumentos(String arg) {
+			return !(arg == null || arg.isEmpty());
+		}
+
+		private String getFieldNome(String arg) {
+			if (existeArgumentos(arg)) {
+				return "Pergunta do dia:";
+			}
+			return "Sua resposta";
+		}
+
+		private String getFieldValor(String arg) {
+			if (existeArgumentos(arg)) {
+				return "Você entende que a comunicação entre as áreas é eficiente(S/N)";
+			}
+			return arg;
+		}
+
+	},
+/*
 	ADD {
 
 		@Override
