@@ -77,7 +77,7 @@ public enum TipoComando implements ComandoProcessor {
 
 		private String getFieldValor(String arg) {
 			if (existeArgumentos(arg)) {
-				return "Voce entende que a comunicação entre as areas e eficiente(S/N)";
+				return "A squad tem metas alinhadas aos objetivos pessoas/profissionais?";
 			}
 			return arg;
 		}
