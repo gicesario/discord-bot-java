@@ -9,6 +9,8 @@ import br.com.dextra.scoremodels.event.ManipuladorEventos;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.Event;
+import discord4j.gateway.intent.Intent;
+import discord4j.gateway.intent.IntentSet;
 
 @Configuration
 public class Configuracao {
@@ -18,7 +20,14 @@ public class Configuracao {
     @Bean
     public <T extends Event> GatewayDiscordClient getGatewayDiscord(List<ManipuladorEventos<T>> eventosRecebidos) {
 
-        GatewayDiscordClient client = DiscordClientBuilder.create(token).build().login().block();
+        IntentSet intentSet = IntentSet.of(Intent.GUILD_MEMBERS);
+
+        GatewayDiscordClient client = DiscordClientBuilder.create(token)
+                        .build()
+                        .gateway()
+                        .setEnabledIntents(intentSet)
+                        .login()
+                        .block();
 
         for (ManipuladorEventos<T> evento : eventosRecebidos) {
            client.on(evento.getTipoEvento())
@@ -26,6 +35,8 @@ public class Configuracao {
              .onErrorResume(evento::tratarErros)
              .subscribe();
        }
+
+       client.onDisconnect().block();
 
        return client;
     }
