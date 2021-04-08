@@ -38,7 +38,7 @@ public class CommandosUtils {
 
     public static Optional<List<Member>> getMembros(Message mensagem) {
     	Flux<User> us = mensagem.getClient().getUsers();
-
+    	System.out.println("Usuarios:");
     	us.collectList().block().forEach(u -> {
     		System.out.println("\nUsuario: " + u.getDiscriminator() + " " + u.getUsername() + " " + u.getTag());
     	});
