@@ -14,7 +14,7 @@ public enum TipoComando implements ComandoProcessor {
 				.setTitle("Score Models | Help:")
 			    .addField("-help", "Exibe todos os comandos disponiveis no bot", false)
 				.addField("-ask pergunta", "O que debater na hora do cafe?", false)
-				.addField("-clima", "Qual a pergunta do dia?", false)
+				.addField("-clima ?", "Qual a pergunta do dia?", false)
 				.addField("-clima S|N", "Respona a pergunta de clima", false)
 				.addField("-lupto colega", "Quem te inspirou dentro da squad esse mes?", false)
 			    .setFooter("Help", msg.getAuthor().get().getAvatarUrl())
@@ -59,27 +59,24 @@ public enum TipoComando implements ComandoProcessor {
 			.setTitle("Score Models | Pergunta de Clima:")
 			.setDescription("Pergunta do dia:")
 			.addField(getFieldNome(arg), getFieldValor(arg), false)
-		    .setFooter("Resposta: S|N", msg.getAuthor().get().getAvatarUrl())
+		    .setFooter("Clima: ", msg.getAuthor().get().getAvatarUrl())
 		    .setTimestamp(Instant.now());
 			return arg;
 		}
 
-		private boolean existeArgumentos(String arg) {
-			return !(arg == null || arg.isEmpty());
-		}
-
 		private String getFieldNome(String arg) {
-			if (existeArgumentos(arg)) {
-				return "Pergunta do dia:";
+			if (arg.trim().equals("?")) {
+				return "A squad tem metas alinhadas aos objetivos pessoas/profissionais?";
 			}
-			return "Sua resposta";
+			return "Digite -clima ? para ver a pergunta do dia";
 		}
 
 		private String getFieldValor(String arg) {
-			if (existeArgumentos(arg)) {
-				return "A squad tem metas alinhadas aos objetivos pessoas/profissionais?";
+			if (arg.trim().equalsIgnoreCase("S") || arg.trim().equalsIgnoreCase("N")) {
+				return arg;
 			}
-			return arg;
+
+			return "Resposta invalida";
 		}
 
 	},
