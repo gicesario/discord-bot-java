@@ -12,26 +12,26 @@ public enum TipoComando implements ComandoProcessor {
 		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
 			spec.setColor(Color.YELLOW)
 				.setTitle("Score Models | Help:")
-			    .addField("-help", "exibe todos os comandos disponíveis no bot", false)
-				.addField("-qoc pergunta", "questão a ser debatida na hora de por café!", false)
-				.addField("-clima", "ver pergunta do dia", false)
-				.addField("-clima S|N", "responder pergunta do dia", false)
-				.addField("-lupto colega", "quem foi o(a) colega ou líder que te inspirou dentro da empresa esse mês?", false)
+			    .addField("-help", "Exibe todos os comandos disponiveis no bot", false)
+				.addField("-ask pergunta", "O que debater na hora do cafe?", false)
+				.addField("-clima", "Qual a pergunta do dia?", false)
+				.addField("-clima S|N", "Respona a pergunta de clima", false)
+				.addField("-lupto colega", "Quem te inspirou dentro da squad esse mes?", false)
 			    .setFooter("Help", msg.getAuthor().get().getAvatarUrl())
 			    .setTimestamp(Instant.now());
 			return arg;
 		}
 	},
 
-	QOC {
+	ASK {
 		@Override
 		public String criarEmbed(Message msg, EmbedCreateSpec spec, String arg) {
 			spec.setColor(Color.BROWN)
-				.setTitle("Score Models | Question da hora do café:")
+				.setTitle("Score Models | Question da hora do cafe:")
 				//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
-				.setDescription("QOC é uma pergunta semanal a ser debatida na hora do café.")
-			    .addField("Sua pergunta:", arg, false)
-			    .setFooter("Café", msg.getAuthor().get().getAvatarUrl())
+				.setDescription("O que debater na hora do cafe?")
+			    .addField("Sua sugestao:", arg, false)
+			    .setFooter("Cafe", msg.getAuthor().get().getAvatarUrl())
 			    .setTimestamp(Instant.now());
 			return arg;
 		}
@@ -43,7 +43,7 @@ public enum TipoComando implements ComandoProcessor {
 			spec.setColor(Color.BLUE)
 			.setTitle("Score Models | Influenciadores:")
 			//.setImage(Resources.class.getResource("img/qoc-logo.png").getPath())
-			.setDescription("quem foi o(a) colega ou líder que te inspirou dentro da empresa esse mês?")
+			.setDescription("Quem te inspirou dentro da squad alem do Inuy?")
 		    .addField("Escolhido:", arg, false)
 		    .setFooter("Influenciadores", msg.getAuthor().get().getAvatarUrl())
 		    .setTimestamp(Instant.now());
@@ -77,7 +77,7 @@ public enum TipoComando implements ComandoProcessor {
 
 		private String getFieldValor(String arg) {
 			if (existeArgumentos(arg)) {
-				return "Você entende que a comunicação entre as áreas é eficiente(S/N)";
+				return "Voce entende que a comunicação entre as areas e eficiente(S/N)";
 			}
 			return arg;
 		}
