@@ -1,53 +1,24 @@
 package br.com.dextra.scoremodels.entity;
 
-import java.time.LocalDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mongodb.lang.NonNull;
 
+@Document
 public class RespostasClima {
 
-	@JsonIgnore
-	private String guid;
+	@Id
+	@NonNull
+	private String _id;
 
-	private String idMembro;
-	private String guidPergunta;
-	private String resposta;
-	private LocalDate data;
+	private String q; // questao
+	private String p; // pessoa respondeu
+	private Integer d; // dia
+	private Integer r; // responsta 0=nap; 1=sim
 
-	public String getGuid() {
-		return guid;
-	}
-	public void setGuid(String guid) {
-		this.guid = guid;
-	}
-	public String getIdMembro() {
-		return idMembro;
-	}
-	public void setIdMembro(String idMembro) {
-		this.idMembro = idMembro;
-	}
-	public String getGuidPergunta() {
-		return guidPergunta;
-	}
-	public void setGuidPergunta(String guidPergunta) {
-		this.guidPergunta = guidPergunta;
-	}
-	public String getResposta() {
-		return resposta;
-	}
-	public void setResposta(String resposta) {
-		this.resposta = resposta;
-	}
-	public LocalDate getData() {
-		return data;
-	}
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
-	@Override
-	public String toString() {
-		return "RespostasClima [idMembro=" + idMembro + ", guidPergunta=" + guidPergunta + ", resposta=" + resposta
-				+ ", data=" + data + "]";
-	}
+
+
+
 
 }

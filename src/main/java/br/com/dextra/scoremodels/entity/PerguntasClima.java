@@ -1,38 +1,19 @@
 package br.com.dextra.scoremodels.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@JsonRootName("perguntasClima")
+import com.mongodb.lang.NonNull;
+
+@Document
 public class PerguntasClima {
 
-	@JsonIgnore
-	private String guid;
+	@Id
+	@NonNull
+	private String _id;
 
-	private String pergunta;
+	private String n; // numero da pergunta
+	private String p; // pergunta
 
-	public PerguntasClima(String guid, String pergunta) {
-		super();
-		this.guid = guid;
-		this.pergunta = pergunta;
-	}
-
-	public String getGuid() {
-		return guid;
-	}
-	public void setGuid(String guid) {
-		this.guid = guid;
-	}
-	public String getPergunta() {
-		return pergunta;
-	}
-	public void setPergunta(String pergunta) {
-		this.pergunta = pergunta;
-	}
-
-	@Override
-	public String toString() {
-		return "Pergunta: [guid=" + guid + ", pergunta=" + pergunta + "]";
-	}
 
 }

@@ -1,43 +1,20 @@
 package br.com.dextra.scoremodels.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.mongodb.lang.NonNull;
+
+@Document
 public class Influenciadores {
 
-	@JsonIgnore
-	private String guid;
-	private String idAdmirador;
-	private String idInfluenciador;
-	private Integer anoMes;
+	@Id
+	@NonNull
+	private String _id;
 
-	public String getGuid() {
-		return guid;
-	}
-	public void setGuid(String guid) {
-		this.guid = guid;
-	}
-	public String getIdAdmirador() {
-		return idAdmirador;
-	}
-	public void setIdAdmirador(String idAdmirador) {
-		this.idAdmirador = idAdmirador;
-	}
-	public String getIdInfluenciador() {
-		return idInfluenciador;
-	}
-	public void setIdInfluenciador(String idInfluenciador) {
-		this.idInfluenciador = idInfluenciador;
-	}
-	public Integer getAnoMes() {
-		return anoMes;
-	}
-	public void setAnoMes(Integer anoMes) {
-		this.anoMes = anoMes;
-	}
-	@Override
-	public String toString() {
-		return "Influenciadores [idAdmirador=" + idAdmirador + ", idInfluenciador=" + idInfluenciador + ", anoMes="
-				+ anoMes + "]";
-	}
+	private String p;
+	private String i;
+	private Integer d;
+
 
 }
